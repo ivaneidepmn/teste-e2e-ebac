@@ -1,3 +1,4 @@
+
 /// <reference types="cypress" />
 
 context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
@@ -10,10 +11,10 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         E validando minha compra ao final */
 
     beforeEach(() => {
-        cy.visit('/')
+        cy.visit('/');
     });
 
-    it.only('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
+    it('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
         // Primeiro produto: Ingrid Running Jacket
         cy.get('.products .product').eq(0).click();
         cy.get('.button-variable-item-Orange').click();
@@ -51,7 +52,7 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
 
         // Avançar para o checkout
         cy.get('.dropdown-toggle > .text-skin > .icon-basket').click(); // Clica para ir para o carrinho
-        cy.get('.checkout').should('be.visible').first().click(); // Garante que o botão está visível e clica no primeiro botão "checkout"
+        cy.get('#cart > .dropdown-menu > .widget_shopping_cart_content > .mini_cart_content > .mini_cart_inner > .mcart-border > .buttons > .checkout').click();
 
         // Preenchendo os detalhes de cobrança
         cy.get('#billing_first_name').type('Fernanda'); // Preenche o primeiro nome
@@ -60,11 +61,13 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         cy.get('#billing_country').select('BR', { force: true }); // Seleciona o país
         cy.get('#billing_address_1').type('Passagem São José n° 821'); // Preenche o endereço
         cy.get('#billing_address_2').type('Casa A'); // Preenche o complemento do endereço
+        cy.get('#select2-billing_state-container').click(); // Clica no campo de estado
+        cy.get('.select2-search__field').type('Belém{enter}'); // Seleciona o estado
         cy.get('#billing_city').type('Belém'); // Preenche a cidade
-        cy.get('#billing_state').select('PA'); // Seleciona o estado
-        cy.get('#billing_postcode').type('66811520'); // Preenche o CEP
+        cy.get('#billing_postcode').type('66811-520'); // Preenche o CEP
         cy.get('#billing_phone').type('91984855912'); // Preenche o telefone
         cy.get('#billing_email').type('fernandak@gmail.com'); // Preenche o email
+        cy.get('#place_order').click();
 
         // Seleciona o método de pagamento
         cy.get('#payment_method_cod').check(); // Seleciona pagamento na entrega
@@ -76,6 +79,7 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
         cy.get('#place_order').click(); // Clica em "Place order"
 
         // Verificar se a compra foi finalizada com sucesso
-        cy.contains('Obrigado. Seu pedido foi recebido.').should('be.visible'); // Verifica a mensagem de confirmação
+        cy.get('.woocommerce-notice').contains('Obrigado. Seu pedido foi recebido.');
+        //cy.contains('Obrigado. Seu pedido foi recebido.').should('be.visible'); // Verifica a mensagem de confirmação
     });
 });

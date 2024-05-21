@@ -27,12 +27,22 @@ context('Funcionalidade Login', () => {
         })
         cy.get('.page-title').should('contain', 'Minha conta')
     });
-
-    it.skip('Deve fazer login com sucesso - sem otimização', () => {
-        cy.get('#username').type(dadosLogin.usuario)
-        cy.get('#password').type(dadosLogin.senha, { log: false })
-        cy.get('.woocommerce-form > .button').click()
-        cy.get('.page-title').should('contain', 'Minha conta')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, aluno_ebac')
-    })
-})
+git
+git
+    cy.visit('/my-account');
+    cy.get('#username').type(dadosLogin.usuario);
+    cy.get('#password').type(dadosLogin.senha, { log: false });
+    cy.get('.woocommerce-form > .button').click();
+    cy.url().should('include', '/my-account');
+    cy.get('.page-title').should('contain', 'Minha conta');
+    cy.get('.woocommerce-MyAccount-content > :nth-child(2)').contains('Olá, ivapmn (não é ivapmn? Sair)');
+});    
+});
+    
+    
+    
+    
+    
+    
+    
+    
