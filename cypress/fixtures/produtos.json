@@ -1,0 +1,28 @@
+{
+  "produtos": [
+      {
+          "index": 0,
+          "cor": "Orange",
+          "tamanho": "M",
+          "quantidade": 2
+      },
+      {
+          "index": 1,
+          "cor": "Red",
+          "tamanho": "L",
+          "quantidade": 2
+      },
+      {
+          "index": 2,
+          "cor": "Gray",
+          "tamanho": "S",
+          "quantidade": 3
+      },
+      {
+          "index": 4,
+          "cor": "Green",
+          "tamanho": "XL",
+          "quantidade": 4
+      }
+  ]
+}

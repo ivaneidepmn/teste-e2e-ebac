@@ -10,8 +10,6 @@ class CheckoutPage {
         cy.get('#billing_postcode').type(cep);
         cy.get('#billing_phone').type(telefone);
         cy.get('#billing_email').type(email);
-        cy.get('#payment_method_cod').click();
-        cy.get('#terms').click();
     }
 
     finalizarCompra() {
@@ -19,8 +17,8 @@ class CheckoutPage {
     }
 
     verificarCompraFinalizada() {
-        cy.get('.woocommerce-notice').should('contain', 'Seu pedido foi recebido');
+        cy.get('.woocommerce-notice').should('contain', 'Obrigado. Seu pedido foi recebido.');
     }
 }
 
-export default new CheckoutPage();
+export default CheckoutPage;

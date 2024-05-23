@@ -1,6 +1,6 @@
 class CarrinhoPage {
     verificarProdutoAdicionado() {
-        cy.get('.woocommerce-message').should('contain', 'foi adicionado no seu carrinho');
+        cy.get('.woocommerce-message').should('contain', 'foram adicionados no seu carrinho');
     }
 
     procederParaCheckout() {
@@ -8,4 +8,4 @@ class CarrinhoPage {
     }
 }
 
-export default new CarrinhoPage();
+export default CarrinhoPage;

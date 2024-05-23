@@ -1,15 +1,15 @@
 class ProdutosPage {
     selecionarProduto(index) {
-        cy.get('.products .product').eq(index).click();
+        cy.get('.products .product').eq(index).should('be.visible').click();
     }
 
     selecionarVariacao(cor, tamanho) {
-        cy.get('.button-variable-item-' + cor).click();
-        cy.get('.button-variable-item-' + tamanho).click();
+        cy.get(`.button-variable-item-${cor}`).click();
+        cy.get(`.button-variable-item-${tamanho}`).click();
     }
 
     definirQuantidade(quantidade) {
-        cy.get('.quantity input').clear().type(quantidade);
+        cy.get('.input-text').clear().type(quantidade);
     }
 
     adicionarAoCarrinho() {
@@ -17,4 +17,4 @@ class ProdutosPage {
     }
 }
 
-export default new ProdutosPage();
+export default ProdutosPage;

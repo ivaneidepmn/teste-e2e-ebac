@@ -6,18 +6,23 @@ Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('.woocommerce-MyAccount-navigation').should('be.visible');
 });
 
-Cypress.Commands.add('comprar', (indiceProduto, cor, tamanho, quantidade) => {
-    cy.visit('/produtos');
-    cy.get('.products .product').eq(indiceProduto).click();
-    cy.get(`.button-variable-item-${tamanho}`).click();
-    cy.get(`.button-variable-item-${cor}`).click();
-    cy.get('.quantity input').clear().type(quantidade);
-    cy.get('.single_add_to_cart_button').click();
-    cy.get('.woocommerce-message').should('contain', 'foi adicionado no seu carrinho');
+Cypress.Commands.add('fazerPedido', (indiceProdutos, cor, tamanho, quantidade) => {
+        ProdutosPage.selecionarProduto(indiceProdutos);
+        ProdutosPage.selecionarVariacao(cor, tamanho);
+        ProdutosPage.definirQuantidade(quantidade);
+        ProdutosPage.adicionarAoCarrinho();
+        CarrinhoPage.verificarProdutoAdicionado();
 });
 
-Cypress.Commands.add('checkout', (primeiroNome, ultimoNome, pais, endereco, numeroEndereco, cidade, estado, cep, telefone, email) => {
-    cy.get('.woocommerce-message > .button').click();
-    cy.get('.checkout-button');
+Cypress.Commands.add('irParaCheckout', () => {
+    CarrinhoPage.procederParaCheckout();
+});
 
+Cypress.Commands.add('preencherCheckout', (primeiroNome, ultimoNome, pais, endereco, numeroEndereco, cidade, estado, cep, telefone, email) => {
+    CheckoutPage.preencherDetalhes(primeiroNome, ultimoNome, pais, endereco, numeroEndereco, cidade, estado, cep, telefone, email);
+    CheckoutPage.finalizarCompra();
+});
+
+Cypress.Commands.add('verificarCompraFinalizada', () => {
+    CheckoutPage.verificarCompraFinalizada();
 });
